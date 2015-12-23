@@ -1,6 +1,6 @@
 <?php
 
-$resultado = sumar("//;\n2;2");
+$resultado = sumar("//;\n1002;1");
 
 echo "El resultado de la suma es: " . $resultado;
 
@@ -13,11 +13,17 @@ function sumar($arg1 = 0){
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
     
+    
+    
     $simbolo = obtenerSimbolo($arg1);
     
     $valores = explode($simbolo,$arg1);
 
     for ($i=0; $i < sizeof($valores); $i++){
+        if ($valores[$i] > 1000)
+        {
+            $valores[$i] = 0;
+        }
         $suma = $suma + $valores[$i];
     }
     return $suma;
