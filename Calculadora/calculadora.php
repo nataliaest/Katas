@@ -1,6 +1,6 @@
 <?php
 
-$resultado = sumar("//;\n3;2");
+$resultado = sumar("//;\n2;2");
 
 echo "El resultado de la suma es: " . $resultado;
 
@@ -13,11 +13,22 @@ function sumar($arg1 = 0){
         echo 'Excepción capturada: ',  $e->getMessage(), "\n";
     }
     
-    if (($arg1[0] === '/') && ($arg1[1] === '/')){
-        $simbolo = $arg1[2];    
+    $simbolo = obtenerSimbolo($arg1);
+    
+    $valores = explode($simbolo,$arg1);
+
+    for ($i=0; $i < sizeof($valores); $i++){
+        $suma = $suma + $valores[$i];
+    }
+    return $suma;
+}
+
+function obtenerSimbolo($sValor){
+    if (($sValor[0] === '/') && ($sValor[1] === '/')){
+        $simbolo = $sValor[2];    
     }
     else{
-        $pos = strpos($arg1, ",");
+        $pos = strpos($sValor, ",");
         if ($pos){
             $simbolo = ",";
         }
@@ -25,12 +36,7 @@ function sumar($arg1 = 0){
             $simbolo = "\n";
         }
     }
-    $valores = explode($simbolo,$arg1);
-
-    for ($i=0; $i < sizeof($valores); $i++){
-        $suma = $suma + $valores[$i];
-    }
-    return $suma;
+    return $simbolo;
 }
 
 function excep($valor){
